@@ -3,6 +3,7 @@ package cadastroGetSet;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class Produto {
     private String nome;
@@ -54,15 +55,24 @@ public class Produto {
         listaDeProdutos.add(produto);
     }
         
-    public static void exibirProduto(){
+    public static void exibirProduto(javax.swing.JTextArea saida, String nome){
         for(Produto produto : listaDeProdutos){
-            System.out.println("\nNome: "+produto.getNome()
-            + "Preço: "+produto.getPreco() 
-            + "Quantidade: "+produto.getQuantidade());
+            JOptionPane.showInternalMessageDialog(saida, "\nNOME: "+produto.getNome());
+            JOptionPane.showInternalMessageDialog(saida, "QUANTIDADE: "+produto.getQuantidade());
+            JOptionPane.showInternalMessageDialog(saida, "PREÇO: "+produto.getPreco());
         }
     }
     
-    public static void excluirProduto(){}
+    public static void excluirProduto(String nome){
+        for(Produto produto : listaDeProdutos){
+            if(produto.getNome().equals(nome)){
+                listaDeProdutos.remove(produto);
+                
+                break;
+            } 
+            
+        }
+    }
     
     public static void atualizarProduto(){}
 }
