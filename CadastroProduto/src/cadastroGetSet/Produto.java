@@ -2,14 +2,12 @@ package cadastroGetSet;
 
 
 import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
 
 public class Produto {
     private String nome;
     private double preco;
     private int quantidade;
-    private static List<Produto> listaDeProdutos = new ArrayList();
+    private static ArrayList<Produto> listaDeProdutos = new ArrayList();
 
     public Produto(String nome, double preco, int quantidade){
         this.nome = nome;
@@ -48,6 +46,11 @@ public class Produto {
             System.out.println("Quantidade inválida!!");
         }
     }
+
+    @Override
+    public String toString() {
+        return "NOME: "+nome+"\nQUANTIDADE: "+quantidade+"\nPREÇO: "+preco;
+    }
     
     public static void cadastrarProduto(String nome, double preco, int quantidade){
         Produto produto = new Produto(nome, preco, quantidade);
@@ -55,24 +58,42 @@ public class Produto {
         listaDeProdutos.add(produto);
     }
         
-    public static void exibirProduto(javax.swing.JTextArea saida, String nome){
-        for(Produto produto : listaDeProdutos){
-            JOptionPane.showInternalMessageDialog(saida, "\nNOME: "+produto.getNome());
-            JOptionPane.showInternalMessageDialog(saida, "QUANTIDADE: "+produto.getQuantidade());
-            JOptionPane.showInternalMessageDialog(saida, "PREÇO: "+produto.getPreco());
+    public static String exibirProduto(){
+        if(listaDeProdutos.isEmpty()){
+            return "Não há produtos cadastrados...\n";
         }
+        StringBuilder resultado = new StringBuilder();
+        
+        for(Produto produto:listaDeProdutos){
+            resultado.append(produto.toString()).append("\n");
+        }
+        
+        return resultado.toString();
     }
     
-    public static void excluirProduto(String nome){
+    public static boolean excluirProduto(String nome){
         for(Produto produto : listaDeProdutos){
-            if(produto.getNome().equals(nome)){
+            if(produto.getNome().equalsIgnoreCase(nome)){
                 listaDeProdutos.remove(produto);
                 
-                break;
-            } 
-            
+                return true;
+            }  
         }
+        
+        return false;
     }
     
-    public static void atualizarProduto(){}
+    public static boolean atualizarProduto(String procura, String nome, double preco, int quantidade){
+        for(Produto produto:listaDeProdutos){
+            if(produto.getNome().equalsIgnoreCase(procura)){
+                produto.setNome(nome);
+                produto.setQuantidade(quantidade);
+                produto.setPreco(preco);
+                
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
