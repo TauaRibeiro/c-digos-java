@@ -20,7 +20,17 @@ public class Funcionario {
     public int getId() {
         return id;
     }
-
+    
+    public boolean setId(int id){
+        for(Funcionario f:lista_funcionarios){
+            if(f.id == id){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -63,7 +73,7 @@ public class Funcionario {
 
     @Override
     public String toString() {
-        return  "ID= " + id + ", NOME= " + nome + ", CPF= " + cpf + ", SAL¡RIO= " + salario ;
+        return  "ID= " + id + ", NOME= " + nome + ", CPF= " + cpf + ", SAL√ÅRIO= " + salario ;
     }
     
     
@@ -85,7 +95,7 @@ public class Funcionario {
     
     public static String mostrar(){
         if(lista_funcionarios.isEmpty()){
-            return "N„o h· funcionarios cadastrados...";
+            return "N√£o h√° funcionarios cadastrados...";
         }
         
         StringBuilder resultado = new StringBuilder();
@@ -99,7 +109,7 @@ public class Funcionario {
     
     public static String editar(Funcionario funcionario){
         if(lista_funcionarios.isEmpty()){
-            return "N„o h· funcion·rios cadastrados...";
+            return "N√£o h√° funcion√°rios cadastrados...";
         }
         
         for(Funcionario f:lista_funcionarios){
@@ -112,22 +122,22 @@ public class Funcionario {
             }
         }
         
-        return "Funcion·rio n„o encontrado";
+        return "Funcion√°rio n√£o encontrado";
     }
     
     public static String excluir(Funcionario funcionario){
         if(lista_funcionarios.isEmpty()){
-            return "N„o h· funcion·rios cadastrados...";
+            return "N√£o h√° funcion√°rios cadastrados...";
         }
         
         for(Funcionario f: lista_funcionarios){
             if(f.id == funcionario.id){
                 lista_funcionarios.remove(f);
                 
-                return "Funcion·rio removido com sucesso!!";
+                return "Funcion√°rio removido com sucesso!!";
             }    
         }
         
-        return "Funcion·rio n„o encontrado...";
+        return "Funcion√°rio n√£o encontrado...";
     }
 }
